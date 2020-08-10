@@ -1,3 +1,7 @@
+%Resolu√ß√£o do Modelo GROWTH do cap√≠tulo 11 do livro Monetary Economics de Godley e Lavoie (2006)
+
+%GODLEY, W.; LAVOIE, M. Monetary Economics: An Integrated Approach to Credit, Money, Income, Production and Wealth. United Kingdom: Palgrave Macmillan. 2006.
+
 clear;
 clc;
 
@@ -5,33 +9,33 @@ T = 1000;
 Z = 500;
 
 
-%Par‚metros
+%Par√¢metros
 addBL           = 0.02;              %mark-up dos bills
-alpha1          = 0.75;              %propens„o marginal a consumir a partir de renda disponÌvel esperada e emprÈstimos
-alpha2          = 0.064;             %propens„o marginal a consumir da renda passada
+alpha1          = 0.75;              %propens√£o marginal a consumir a partir de renda dispon√≠vel esperada e empr√©stimos
+alpha2          = 0.064;             %propens√£o marginal a consumir da renda passada
 bandB           = 0.01;              %poder de barganha
 bandT           = 0.01;              %poder de barganha
 beta            = 0.5;               %vendas esperadas entre 0 e 1
-beta_b          = 0.4;               %capital prÛprio dos bancos
-delta           = 0.10667;           %depreciaÁ„o ???
-delta_rep       = 0.1;               %repagamento de emprÈstimos
+beta_b          = 0.4;               %capital pr√≥prio dos bancos
+delta           = 0.10667;           %deprecia√ß√£o ???
+delta_rep       = 0.1;               %repagamento de empr√©stimos
 epsilon         = 0.8;               %ajuste do mark-up
-epsilon_2       = 0.5;               %renda disponÌvel esperada 
+epsilon_2       = 0.5;               %renda dispon√≠vel esperada 
 epsilon_b       = 0.25;              %calotes esperados    
-eta_0           = 0.07416;           %emprÈstimos
-eta_r           = 0.4;               %emprÈstimos
-meta            = 0.6;               %ajuste para nÌvel de emprego desejado
-NCAR            = 0.1;               %regulaÁ„o de alavancagem
-gama            = 0.15;              %invent·rios esperados entre 0 e 1, de curto prazo
-gama_u          = 0.05;              %impacto de utilizaÁ„o de capacidade na taxa de crescimento do capital
-gama_r          = 0.1;               %impacto do custo de emprÈstimos (juros) na taxa de crescimento do capital
+eta_0           = 0.07416;           %empr√©stimos
+eta_r           = 0.4;               %empr√©stimos
+meta            = 0.6;               %ajuste para n√≠vel de emprego desejado
+NCAR            = 0.1;               %regula√ß√£o de alavancagem
+gama            = 0.15;              %invent√°rios esperados entre 0 e 1, de curto prazo
+gama_u          = 0.05;              %impacto de utiliza√ß√£o de capacidade na taxa de crescimento do capital
+gama_r          = 0.1;               %impacto do custo de empr√©stimos (juros) na taxa de crescimento do capital
 grg             = 0.03;              %Tx de crescimento do gasto do governo
 grp             = 0.03;              %produtividade
-gr0             = 0.00122;           %exÛgeno na taxa de crescimento do capital
-ho              = 0.05;              %requisito de depÛsitos
+gr0             = 0.00122;           %ex√≥geno na taxa de crescimento do capital
+ho              = 0.05;              %requisito de dep√≥sitos
 lambda_b        = 0.0153;            %dividendos dos bancos
 lambda_c        = 0.05;              %demanda transacional por moeda
-lambda_10       = 0.11909;           %alocaÁ„o de portfÛlio
+lambda_10       = 0.11909;           %aloca√ß√£o de portf√≥lio
 lambda_11       = 6;
 lambda_12       = 2;
 lambda_13       = 2;
@@ -55,20 +59,20 @@ lambda_42       = 2;
 lambda_43       = 2;
 lambda_44       = 6;
 lambda_45       = 0.1;
-omega_0         = -0.23322;          %intercepto do sal·rio real desejado
-omega_1         = 1;                 %reaÁ„o do sal·rio real desejado ‡ produtividade
+omega_0         = -0.23322;          %intercepto do sal√°rio real desejado
+omega_1         = 1;                 %rea√ß√£o do sal√°rio real desejado √† produtividade
 omega_2         = 2;                 %demanda salarial por poder de barganha
-omega_3         = 0.45621;           %sal·rio nominal
-psi_d           = 0.15255;           %lucros distribuÌdos
+omega_3         = 0.45621;           %sal√°rio nominal
+psi_d           = 0.15255;           %lucros distribu√≠dos
 psi_u           = 0.92;              %lucros retidos
-sigma_N         = 0.1666;            %custo normal unit·rio histÛrico
-sigma_T         = 0.2;               %target dos invent·rios no longo prazo
-theta           = 0.22844;           %alÌquota de imposto 
-zeta_m          = 0.0008;            %variaÁ„o do retorno dos depÛsitos
+sigma_N         = 0.1666;            %custo normal unit√°rio hist√≥rico
+sigma_T         = 0.2;               %target dos invent√°rios no longo prazo
+theta           = 0.22844;           %al√≠quota de imposto 
+zeta_m          = 0.0008;            %varia√ß√£o do retorno dos dep√≥sitos
 
 
 
-%Vari·veis ExÛgenas 
+%Vari√°veis Ex√≥genas 
 
 rb          = 0.035.*ones(T,1);
 npl         = 0.02.*ones(T,1);
@@ -80,33 +84,33 @@ z2          = ones(T,1);
 z3          = ones(T,1);
 z4          = ones(T,1);
 z5          = ones(T,1);
-%PrÈ-alocaÁ„o de Vari·veis EndÛgenas
+%Pr√©-aloca√ß√£o de Vari√°veis End√≥genas
 
 
-y                 = 83867230.*ones(T,Z);                                    %decis„o de produÁ„o real
-p                 = 7.1537.*ones(T,Z);                                      %nÌvel de preÁos
-addl              = 0.04592.*ones(T,Z);                                     %spread entre emprÈstimos e depÛsitos
+y                 = 83867230.*ones(T,Z);                                    %decis√£o de produ√ß√£o real
+p                 = 7.1537.*ones(T,Z);                                      %n√≠vel de pre√ßos
+addl              = 0.04592.*ones(T,Z);                                     %spread entre empr√©stimos e dep√≥sitos
 B_bd              = 42500560.*ones(T,Z);                                    %bills demandados pelos bancos
 B_bs              = 42500560.*ones(T,Z);                                    %bills ofertados aos bancos
 B_cbd             = 45083930.*ones(T,Z);                                    %bills demandados banco central
 B_cbs             = 45083930.*ones(T,Z);                                    %bills ofertados banco central
-B_hd              = 32340300.*ones(T,Z);                                    %bills demandados famÌlias
-B_hs              = 32340300.*ones(T,Z);                                    %bills ofertados famÌlias
+B_hd              = 32340300.*ones(T,Z);                                    %bills demandados fam√≠lias
+B_hs              = 32340300.*ones(T,Z);                                    %bills ofertados fam√≠lias
 B_s               = (B_bs(1,1)+B_cbs(1,1)+B_hs(1,1)).*ones(T,Z);            %oferta total de bills
 BL_d              = 8141406.*ones(T,Z);                                     %bonds demandados
 BL_s              = 8141406.*ones(T,Z);                                     %bonds ofertados
 BLR               = 0.10834.*ones(T,Z);                                     %liquidez dos bancos
-BUR               = 0.06324.*ones(T,Z);                                     %peso da dÌvida das famÌlias
+BUR               = 0.06324.*ones(T,Z);                                     %peso da d√≠vida das fam√≠lias
 C                 = 7120643.*ones(T,Z);                                     %consumo nominal
 c                 = 7120643.*ones(T,Z);                                     %consumo real
 CAR               = 0.09245.*ones(T,Z);                                     %capital adequacy ratio
 CG                = ones(T,Z);                                              %ganhos de capital dos bonds
 ER                = ones(T,Z);                                              %taxa de emprego
-e_d               = 5039.6.*ones(T,Z);                                      %aÁıes demandadas
-e_s               = 5039.6.*ones(T,Z);                                      %aÁıes ofertadas
-eta               = 0.0498.*ones(T,Z);                                      %raz„o entre emprÈstimos novos e renda
-F_b               = 1688936.*ones(T,Z);                                     %lucros banc·rios
-F_bt              = 1688947.*ones(T,Z);                                     %lucros banc·rios desejados
+e_d               = 5039.6.*ones(T,Z);                                      %a√ß√µes demandadas
+e_s               = 5039.6.*ones(T,Z);                                      %a√ß√µes ofertadas
+eta               = 0.0498.*ones(T,Z);                                      %raz√£o entre empr√©stimos novos e renda
+F_b               = 1688936.*ones(T,Z);                                     %lucros banc√°rios
+F_bt              = 1688947.*ones(T,Z);                                     %lucros banc√°rios desejados
 F_cb              = (rb(1,1).*B_cbd(1,1)).*ones(T,Z);                       %lucros do banco central
 F_f               = 17508820.*ones(T,Z);                                    %lucros das firmas 
 F_ft              = 17443490.*ones(T,Z);                                    %lucros desejados das firmas
@@ -117,81 +121,81 @@ FU_bt             = ones(T,Z);                                              %luc
 FU_f              = 14674200.*ones(T,Z);                                    %lucros retidos das firmas
 FU_ft             = 14589340.*ones(T,Z);                                    %lucros retidos desejados das firmas
 G                 = (22681210.*7.1537).*ones(T,Z);                          %gasto nominal do governo
-GL                = ones(T,Z);                                              %novos emprÈstimos desejados
+GL                = ones(T,Z);                                              %novos empr√©stimos desejados
 g                 = 22681210.*ones(T,Z);                                    %gasto real do governo
 gr_k              = 0.0300.*ones(T,Z);                                      %TX do crescimento de capital
 H_bd              = 1961455.*ones(T,Z);                                     %moeda demandada pelos bancos
 H_bs              = 1961455.*ones(T,Z);                                     %moeda ofertada aos bancos
-H_hd              = 2546938.*ones(T,Z);                                     %moeda desejada pelas famÌlias
-H_hs              = 2546938.*ones(T,Z);                                     %moeda ofertada ‡s famÌlias
-H_s               = (H_hs(1,1)+H_bs(1,1)).*ones(T,Z);                       %base monet·ria
-HC_e              = ones(T,Z);                                              %custos esperados histÛricos
-IN                = 11218840.*ones(T,Z);                                    %invent·rios nominais
+H_hd              = 2546938.*ones(T,Z);                                     %moeda desejada pelas fam√≠lias
+H_hs              = 2546938.*ones(T,Z);                                     %moeda ofertada √†s fam√≠lias
+H_s               = (H_hs(1,1)+H_bs(1,1)).*ones(T,Z);                       %base monet√°ria
+HC_e              = ones(T,Z);                                              %custos esperados hist√≥ricos
+IN                = 11218840.*ones(T,Z);                                    %invent√°rios nominais
 i                 = 16376300.*ones(T,Z);                                    %investimento real bruto
 I                 = (i(1,1).*p(1,1)).*ones(T,Z);                            %investimento bruto nominal
-in                = 2004754.*ones(T,Z);                                     %invent·rios
-in_e              = 2004754.*ones(T,Z);                                     %invent·rios esperados
-in_T              = 2004754.*ones(T,Z);                                     %invent·rios desejados
+in                = 2004754.*ones(T,Z);                                     %invent√°rios
+in_e              = 2004754.*ones(T,Z);                                     %invent√°rios esperados
+in_T              = 2004754.*ones(T,Z);                                     %invent√°rios desejados
 k                 = 1725114.*ones(T,Z);                                     %estoque de capital real
 K                 = (k(1,1).*p(1,1)).*ones(T,Z);                            %estoque nominal de capital
-L_fd              = 15457450.*ones(T,Z);                                    %emprÈstimos desejados pelas firmas
-L_fs              = 15457450.*ones(T,Z);                                    %emprÈstimos ofertados ‡s firmas
-L_hd              = 20923050.*ones(T,Z);                                    %emprÈstimos desejados pelas famÌlias
-L_hs              = 20923050.*ones(T,Z);                                    %emprÈstimos ofertados pelas famÌlias
-M_d               = 39229100.*ones(T,Z);                                    %depÛsitos demandados
-M_h               = 39229100.*ones(T,Z);                                    %depÛsitos das famÌlias
-M_s               = 39229100.*ones(T,Z);                                    %depÛsitos ofertados
-N                 = 87.181.*ones(T,Z);                                      %nÌvel de emprego
-N_T               = 87.181.*ones(T,Z);                                      %nÌvel de emprego desejado
+L_fd              = 15457450.*ones(T,Z);                                    %empr√©stimos desejados pelas firmas
+L_fs              = 15457450.*ones(T,Z);                                    %empr√©stimos ofertados √†s firmas
+L_hd              = 20923050.*ones(T,Z);                                    %empr√©stimos desejados pelas fam√≠lias
+L_hs              = 20923050.*ones(T,Z);                                    %empr√©stimos ofertados pelas fam√≠lias
+M_d               = 39229100.*ones(T,Z);                                    %dep√≥sitos demandados
+M_h               = 39229100.*ones(T,Z);                                    %dep√≥sitos das fam√≠lias
+M_s               = 39229100.*ones(T,Z);                                    %dep√≥sitos ofertados
+N                 = 87.181.*ones(T,Z);                                      %n√≠vel de emprego
+N_T               = 87.181.*ones(T,Z);                                      %n√≠vel de emprego desejado
 NPL               = 299377.*ones(T,Z);                                      %non performing loans
-NUC               = 5.5961.*ones(T,Z);                                      %custo unit·rio normal
-NHUC              = ones(T,Z);                                              %custo unit·rio normal histÛrico
-nl                = 661949.*ones(T,Z);                                      %emprÈstimos novos reais
-NL                = (nl(1,1).*p(1,1)).*ones(T,Z);                           %emprÈstimos novos para as famÌlias
-npl_e             = 0.02.*ones(T,Z);                                        %emprÈstimos n„o pagos esperados
-omega_T           = 109566.*ones(T,Z);                                      %sal·rio real desejado
-OF_b              = 3363394.*ones(T,Z);                                     %fundos prÛprios dos bancos
-OF_be             = 3363394.*ones(T,Z);                                     %fundos prÛprios esperados
-OF_bt             = 3363394.*ones(T,Z);                                     %fundos prÛprios desejados                                                                                          
-pe                = 17621.*ones(T,Z);                                       %preÁos das aÁıes
-PE                = ((pe(1,1).*e_s(1,1))./F_f(1,1))./ones(T,Z);             %raz„o preÁos e rendimentos
+NUC               = 5.5961.*ones(T,Z);                                      %custo unit√°rio normal
+NHUC              = ones(T,Z);                                              %custo unit√°rio normal hist√≥rico
+nl                = 661949.*ones(T,Z);                                      %empr√©stimos novos reais
+NL                = (nl(1,1).*p(1,1)).*ones(T,Z);                           %empr√©stimos novos para as fam√≠lias
+npl_e             = 0.02.*ones(T,Z);                                        %empr√©stimos n√£o pagos esperados
+omega_T           = 109566.*ones(T,Z);                                      %sal√°rio real desejado
+OF_b              = 3363394.*ones(T,Z);                                     %fundos pr√≥prios dos bancos
+OF_be             = 3363394.*ones(T,Z);                                     %fundos pr√≥prios esperados
+OF_bt             = 3363394.*ones(T,Z);                                     %fundos pr√≥prios desejados                                                                                          
+pe                = 17621.*ones(T,Z);                                       %pre√ßos das a√ß√µes
+PE                = ((pe(1,1).*e_s(1,1))./F_f(1,1))./ones(T,Z);             %raz√£o pre√ßos e rendimentos
 phi               = 0.26416.*ones(T,Z);                                     %mark-up
 phi_T             = 0.26417.*ones(T,Z);                                     %mark-up desejado
-pi                = 0.0026.*ones(T,Z);                                      %taxa de inflaÁ„o
+pi                = 0.0026.*ones(T,Z);                                      %taxa de infla√ß√£o
 pr                = 134621.*ones(T,Z);                                      %produtividade
 q                 = ones(T,Z);                                              %q de tobin
-REP               = 2026110.*ones(T,Z);                                     %emprÈstimos pagos
+REP               = 2026110.*ones(T,Z);                                     %empr√©stimos pagos
 rbl               = 0.055.*ones(T,Z);                                       %taxa de juros de longo prazo
-pbl               = (1./rbl(1,1)).*ones(T,Z);                               %preÁo dos bonds                                              
-rl                = 0.06522.*ones(T,Z);                                     %taxa de juros dos emprÈstimos
-rm                = 0.02.*ones(T,Z);                                        %taxa de juros dos depÛsitos
-rrl               = (((1+rl(1,1))./(1+pi(1,1))) - 1).*ones(T,Z);            %taxa de juros real dos emprÈstimos
+pbl               = (1./rbl(1,1)).*ones(T,Z);                               %pre√ßo dos bonds                                              
+rl                = 0.06522.*ones(T,Z);                                     %taxa de juros dos empr√©stimos
+rm                = 0.02.*ones(T,Z);                                        %taxa de juros dos dep√≥sitos
+rrl               = (((1+rl(1,1))./(1+pi(1,1))) - 1).*ones(T,Z);            %taxa de juros real dos empr√©stimos
 rk                = 0.03008.*ones(T,Z);                                     %retorno sobre dividendos
 s                 = 11677980.*ones(T,Z);                                    %vendas reais
 S                 = (s(1,1).*p(1,1)).*ones(T,Z);                            %vendas nominais
 s_e               = 11677990.*ones(T,Z);                                    %vendas esperadas
-sigma_se          = (in(1,1)./s_e(1,1)).*ones(T,Z);                         %raz„o invent·rios/vendas esperadas
+sigma_se          = (in(1,1)./s_e(1,1)).*ones(T,Z);                         %raz√£o invent√°rios/vendas esperadas
 V                 = 156798400.*ones(T,Z);                                   %riqueza
-V_fma             = (V(1,1)-H_hd(1,1)-OF_b(1,1)).*ones(T,Z);                %riqueza disponÌvel para investir
+V_fma             = (V(1,1)-H_hd(1,1)-OF_b(1,1)).*ones(T,Z);                %riqueza dispon√≠vel para investir
 v                 = (V(1,1)./p(1,1)).*ones(T,Z);                            %riqueza real
-W                 = 753353.*ones(T,Z);                                      %sal·rio nominal
+W                 = 753353.*ones(T,Z);                                      %sal√°rio nominal
 WB                = (W(1,1).*N(1,1)).*ones(T,Z);                            %folha de pagamentos
 Y                 = (y(1,1).*p(1,1)).*ones(T,Z);                            %PIB nominal
-YD_r              = 54660390.*ones(T,Z);                                    %renda disponÌvel regular
-YD_hs             = ones(T,Z);                                              %renda disponÌvel haig-simons
+YD_r              = 54660390.*ones(T,Z);                                    %renda dispon√≠vel regular
+YD_hs             = ones(T,Z);                                              %renda dispon√≠vel haig-simons
 YP                = 70844000.*ones(T,Z);                                    %renda pessoal nominal
-Tx                = (theta.*YP(1,1)).*ones(T,Z);                            %tributaÁ„o
-yd_r              = (YD_r(1,1)./p(1,1)).*ones(T,Z);                         %renda disponÌvel regular real
-yd_er             = 7585732.*ones(T,Z);                                     %renda disponÌvel regular real esperada
+Tx                = (theta.*YP(1,1)).*ones(T,Z);                            %tributa√ß√£o
+yd_r              = (YD_r(1,1)./p(1,1)).*ones(T,Z);                         %renda dispon√≠vel regular real
+yd_er             = 7585732.*ones(T,Z);                                     %renda dispon√≠vel regular real esperada
 GD                = (B_bs(1,1)+B_hs(1,1)+...
-    BL_s(1,1).*pbl(1,1)+H_s(1,1)).*ones(T,Z);                               %dÌvida nominal do governo
-u                 = (k(1,1)./y(1,1)).*ones(T,Z);                            %utilizaÁ„o de capacidade
-UC                = (WB(1,1)./y(1,1)).*ones(T,Z);                           %custo unit·rio
+    BL_s(1,1).*pbl(1,1)+H_s(1,1)).*ones(T,Z);                               %d√≠vida nominal do governo
+u                 = (k(1,1)./y(1,1)).*ones(T,Z);                            %utiliza√ß√£o de capacidade
+UC                = (WB(1,1)./y(1,1)).*ones(T,Z);                           %custo unit√°rio
 PSBR              = (G(1,1) + rb(1,1).*(B_hs(1,1) + B_bs(1,1))...
-    + BL_s(1,1) - Tx(1,1)).*ones(T,Z);                                      %dÈficit nominal do governo
+    + BL_s(1,1) - Tx(1,1)).*ones(T,Z);                                      %d√©ficit nominal do governo
 
 
-%SoluÁ„o do Modelo :
+%Solu√ß√£o do Modelo :
 
 for t=2:T
     for z=2:Z
@@ -318,7 +322,7 @@ in_e(t,z)   = in(t-1,end) + gama.*(in_T(t,z-1) - in(t-1,end));              %11.
 in(t,z)     = in(t-1,end) + y(t,z-1) - s(t,z-1);                            %11.5
 k(t,z)      = k(t-1,end).*(1 + gr_k(t,z-1));                                %11.6 
 gr_k(t,z)   = gr0 + gama_u.*u(t,z-1) - gama_r.*rrl(t,z-1);                  %11.7
-u(t,z)      = y(t,z-1)./k(t-1,end);                                         %11.8 utilizaÁ„o de capacidade vezes produtividade do capital (por que os dois n„o s„o do mesmo perÌodo?)
+u(t,z)      = y(t,z-1)./k(t-1,end);                                         %11.8 utiliza√ß√£o de capacidade vezes produtividade do capital (por que os dois n√£o s√£o do mesmo per√≠odo?)
 rrl(t,z)    = ((1+rl(t,z-1))./(1+pi(t,z-1))) - 1;                           %11.9
 pi(t,z)     = (p(t,z-1)./p(t-1,end))-1;                                     %11.10
 i(t,z)      = (gr_k(t,z-1) + delta).*k(t-1,end);                            %11.11
@@ -327,9 +331,9 @@ S(t,z)      = s(t,z-1).*p(t,z-1);                                           %11.
 IN(t,z)     = in(t,z-1).*p(t,z-1);                                          %11.14
 I(t,z)      = i(t,z-1).*p(t,z-1);                                           %11.15
 K(t,z)      = k(t,z-1).*p(t,z-1);                                           %11.16
-Y(t,z)      = s_e(t,z-1).*p(t,z-1) + (in_e(t,z-1) - in(t-1,end)).*p(t,z-1); %11.17 n„o tem equivalÍncia entre essa definiÁ„o de produto nominal e a do produto real
+Y(t,z)      = s_e(t,z-1).*p(t,z-1) + (in_e(t,z-1) - in(t-1,end)).*p(t,z-1); %11.17 n√£o tem equival√™ncia entre essa defini√ß√£o de produto nominal e a do produto real
 
-% 1.2) Decisıes dos custos 
+% 1.2) Decis√µes dos custos 
 
 if ge(ER(t,z),1 - bandB) && ge(1 + bandT,ER(t,z))
     z3(t,1)      = 1;
@@ -363,7 +367,7 @@ NUC(t,z)    = W(t,z-1)./pr(t,z-1);                                          %11.
 NHUC(t,z)   = (1 - sigma_N).*NUC(t,z-1) +...
     sigma_N.*NUC(t-1,end).*(1 + rl(t,z-1));                                 %11.28
 
-% 1.3) Decisıes de preÁos 
+% 1.3) Decis√µes de pre√ßos 
 
 p(t,z)      = (1 + phi(t,z-1)).*NHUC(t,z-1);                                %11.29
 phi(t,z)    = phi(t-1,end) + epsilon.*(phi_T(t-1,end) - phi(t-1,end));      %11.30 deveria ser o alvo no presente
@@ -376,7 +380,7 @@ F_ft(t,z)   = FU_ft(t,z-1) + FD_f(t,z-1) + ...
 FU_ft(t,z)  = psi_u.*I(t-1,end);                                            %11.35
 FD_f(t,z)   = psi_d.*F_f(t-1,end);                                          %11.36
 F_f(t,z)    = S(t,z-1) - WB(t,z-1) + (IN(t,z-1) - IN(t-1,end))...
-    - rl(t,z-1).*IN(t-1,end);                                               %11.37 porque variaÁ„o de invent·rio entra como positivo
+    - rl(t,z-1).*IN(t-1,end);                                               %11.37 porque varia√ß√£o de invent√°rio entra como positivo
 FU_f(t,z)   = F_f(t,z-1) - FD_f(t,z-1) -...
     rl(t,z-1).*(L_fd(t-1,end) - IN(t-1,end) + NPL(t,z-1));                  %11.38
 L_fd(t,z)   = L_fd(t-1,end) + I(t,z-1) + (IN(t,z-1) - IN(t-1,end)) ...
@@ -384,12 +388,12 @@ L_fd(t,z)   = L_fd(t-1,end) + I(t,z-1) + (IN(t,z-1) - IN(t-1,end)) ...
 NPL(t,z)    = npl(t,1).*L_fd(t-1,end);                                      %11.40
 e_s(t,z)    = e_s(t-1,end) + (1 - psi_u).*I(t-1,end)./pe(t,z-1);            %11.41
 rk(t,z)     = FD_f(t,z-1)./(e_s(t-1,end).*pe(t-1,end));                     %11.42
-PE(t,z)     = pe(t,z-1)./(F_f(t,z-1)./e_s(t-1,end));                        %11.43 obs: o preÁo das aÁıes fica parado o tempo todo
-q(t,z)      = (e_s(t,z-1).*pe(t,z-1) + L_fd(t,z-1))./(K(t,z-1) + IN(t,z-1));%11.44 n„o deveriam ser somente os emprÈstimos das firmas?
+PE(t,z)     = pe(t,z-1)./(F_f(t,z-1)./e_s(t-1,end));                        %11.43 obs: o pre√ßo das a√ß√µes fica parado o tempo todo
+q(t,z)      = (e_s(t,z-1).*pe(t,z-1) + L_fd(t,z-1))./(K(t,z-1) + IN(t,z-1));%11.44 n√£o deveriam ser somente os empr√©stimos das firmas?
 
-% 2) FAMÕLIAS
+% 2) FAM√çLIAS
     
-% 2.1) Renda e decisıes de consumo
+% 2.1) Renda e decis√µes de consumo
 
 
 YP(t,z)     = WB(t,z-1) + FD_f(t,z-1) + FD_b(t,z-1)...
@@ -400,16 +404,16 @@ YD_r(t,z)   = YP(t,z-1) - Tx(t,z-1) - rl(t-1,end).*L_hd(t-1,end);           %11.
 YD_hs(t,z)  = YD_r(t,z-1) + CG(t,z-1);                                      %11.48
 CG(t,z)     = (pbl(t,z-1) - pbl(t-1,end)).*BL_d(t-1,end)...
     + (pe(t,z-1) - pe(t-1,end)).*e_d(t-1,end) +...
-    (OF_b(t,z-1) - OF_b(t-1,end));                                          %11.49 nao deveriam ter a mudanÁa de quantidades tambÈm?
-V(t,z)      = V(t-1,end) + YD_r(t,z-1) - C(t,z-1);                          %11.50 desse jeito os ganhos de capital n„o afetam a riqueza
+    (OF_b(t,z-1) - OF_b(t-1,end));                                          %11.49 nao deveriam ter a mudan√ßa de quantidades tamb√©m?
+V(t,z)      = V(t-1,end) + YD_r(t,z-1) - C(t,z-1);                          %11.50 desse jeito os ganhos de capital n√£o afetam a riqueza
 v(t,z)      = V(t,z-1)./p(t,z-1);                                           %11.51
 C(t,z)      = p(t,z-1).*c(t,z-1);                                           %11.52
 c(t,z)      = alpha1.*(yd_r(t,z-1) + nl(t,z-1)) + alpha2.*v(t-1,end);       %11.53
 yd_er(t,z)  = epsilon_2.*yd_r(t,z-1) +...
-    (1 - epsilon_2).*yd_r(t-1,end).*(1 + grp);                              %11.54 aqui tambÈm, renda presente definindo a renda esperada
+    (1 - epsilon_2).*yd_r(t-1,end).*(1 + grp);                              %11.54 aqui tamb√©m, renda presente definindo a renda esperada
 yd_r(t,z)   = YD_r(t,z)./p(t,z-1) - pi(t,z-1).*V(t-1,end)./p(t,z-1);        %11.55
 
-% 2.2) Decisıes de EmprÈstimos
+% 2.2) Decis√µes de Empr√©stimos
 
 GL(t,z)     = eta(t,z-1).*YP(t,z-1);                                        %11.56
 eta(t,z)    = eta_0 - eta_r.*rrl(t,z-1);                                    %11.57
@@ -419,12 +423,12 @@ L_hd(t,z)   = L_hd(t-1,end) + NL(t,z-1);                                    %11.
 nl(t,z)     = NL(t,z-1)./p(t,z-1);                                          %11.61
 BUR(t,z)    = (REP(t,z-1) + rl(t-1,end).*L_hd(t-1,end))./YP(t,z-1);         %11.62
 
-% 2.3) AlocaÁ„o de PortfÛlio 
+% 2.3) Aloca√ß√£o de Portf√≥lio 
 
 M_d(t,z)    = (lambda_10 + lambda_11.*rm(t,z-1) - lambda_12.*rb(t,1) ...
     - lambda_13.*rbl(t,z-1) - lambda_14.*rk(t,z-1) ...
-    + lambda_15.*(YP(t,z-1)./V_fma(t-1,end))).*V_fma(t-1,end);              %11.63 qual o sentido de deixar essa equaÁ„o aqui se ela È a vari·vel buffer
-B_hd(t,z)   = (lambda_20 - lambda_21.*rm(t,z-1) + lambda_22.*rb(t,1) ...    % quando roda o modelo, ali·s, esse aqui fica negativo
+    + lambda_15.*(YP(t,z-1)./V_fma(t-1,end))).*V_fma(t-1,end);              %11.63 qual o sentido de deixar essa equa√ß√£o aqui se ela √© a vari√°vel buffer
+B_hd(t,z)   = (lambda_20 - lambda_21.*rm(t,z-1) + lambda_22.*rb(t,1) ...    % quando roda o modelo, ali√°s, esse aqui fica negativo
     - lambda_23.*rbl(t,z-1) - lambda_24.*rk(t,z-1) ...
     - lambda_25.*(YP(t,z-1)./V_fma(t-1,end))).*V_fma(t-1,end);              %11.64
 BL_d(t,z)   = (lambda_30 - lambda_31.*rm(t,z-1) - lambda_32.*rb(t,1) ...
@@ -435,18 +439,18 @@ e_d(t,z)    = (lambda_40 - lambda_41.*rm(t,z-1) - lambda_42.*rb(t,1) ...
     - lambda_45.*(YP(t,z-1)./V_fma(t-1,end))).*V_fma(t-1,end)./pe(t,z-1);   %11.66
 M_h(t,z)    = V_fma(t,z-1) - B_hd(t,z-1) - pbl(t,z-1).*BL_d(t,z-1)...
     - pe(t,z-1).*e_d(t,z-1);                                                %11.67
-V_fma(t,z)  = V(t,z-1) + L_hd(t,z-1) - H_hd(t,z-1) - OF_b(t,z-1);           %11.68 n„o deveria se definir a riqueza disponÌvel para emprÈstimos somente a partir da riqueza lÌquida?
+V_fma(t,z)  = V(t,z-1) + L_hd(t,z-1) - H_hd(t,z-1) - OF_b(t,z-1);           %11.68 n√£o deveria se definir a riqueza dispon√≠vel para empr√©stimos somente a partir da riqueza l√≠quida?
 H_hd(t,z)   = lambda_c.*C(t,z-1);                                           %11.69
 e_d(t,z)    = e_s(t,z-1);                                                   %11.70
 
-% 3) SETOR P⁄BLICO
+% 3) SETOR P√öBLICO
 
 % 3.1) Governo 
 
 G(t,z)      = p(t,z-1).*g(t,z-1);                                           %11.71
 g(t,z)      = g(t-1,end).*(1 + grg);                                        %11.72
 PSBR(t,z)   = G(t,z-1) + rb(t-1,1).*(B_hs(t-1,end) + B_bs(t-1,end))...
-    + BL_s(t-1,end) - Tx(t,z-1);                                            %11.73 por que n„o entram os tÌtulos do banco central nessa definiÁ„o?
+    + BL_s(t-1,end) - Tx(t,z-1);                                            %11.73 por que n√£o entram os t√≠tulos do banco central nessa defini√ß√£o?
 B_s(t,z)    = B_s(t-1,end) + PSBR(t,z-1) - (BL_s(t,z-1)...
     - BL_s(t-1,end)).*pbl(t,z-1);                                           %11.74
 GD(t,z)     = B_hs(t,z-1) + BL_s(t,z-1) + H_s(t,z-1);                       %11.75
@@ -464,17 +468,17 @@ B_cbs(t,z)  = B_cbd(t,z-1);                                                 %11.
 rbl(t,z)    = rb(t,1) + addBL;                                              %11.85
 pbl(t,z)    = 1./rbl(t,z-1);                                                %11.86
 
-% 4) SETOR BANC¡RIO 
+% 4) SETOR BANC√ÅRIO 
 
-% 4.1) Agregados Monet·rios
+% 4.1) Agregados Monet√°rios
 
-M_s(t,z)    = M_d(t,z-1);                                                   %11.87 porque o Ms nessas equaÁıes se ele È diferente da quantidade de moeda em posse das famÌlias?
+M_s(t,z)    = M_d(t,z-1);                                                   %11.87 porque o Ms nessas equa√ß√µes se ele √© diferente da quantidade de moeda em posse das fam√≠lias?
 L_fs(t,z)   = L_fd(t,z-1);                                                  %11.88
 L_hs(t,z)   = L_hd(t,z-1);                                                  %11.89
 H_bd(t,z)   = ho.*M_h(t,z-1);                                               %11.90
 B_bs(t,z)   = B_s(t,z-1) - B_hs(t,z-1) - B_cbs(t,z-1);                      %11.91
 B_bd(t,z)   = M_d(t,z-1) - L_fs(t,z-1) - L_hs(t,z-1)...
-    - H_bd(t,z-1) + OF_b(t,z-1);                                            %11.92 parece que o sentido t· trocado nisso aqui
+    - H_bd(t,z-1) + OF_b(t,z-1);                                            %11.92 parece que o sentido t√° trocado nisso aqui
 BLR(t,z)    = B_bd(t,z-1)./M_d(t,z-1);                                      %11.93
 
 
@@ -489,13 +493,13 @@ else
        z2(t,1)   = 0;
 end
 
-rm(t,z)     = -zeta_m.*(z1(t,1) - z2(t,1)) + rm(t-1,end);                   %11.95 sinal dessa t· trocado no livro
+rm(t,z)     = -zeta_m.*(z1(t,1) - z2(t,1)) + rm(t-1,end);                   %11.95 sinal dessa t√° trocado no livro
 
-% 4.2) Retornos dos EmprÈstimos 
+% 4.2) Retornos dos Empr√©stimos 
 
 rl(t,z)     = rm(t,z-1) + addl(t,z-1);                                      %11.98
-OF_bt(t,z)  = NCAR.*(L_fs(t-1,end) + L_hs(t-1,end));                        %11.99 se o banco for manter essa regra e sÛ dar os emprÈstimos que todo mundo aceita È muito f·cil o spread se tornar negativo, pois, se poucos emprÈstimos forem tomados, o lucro desejado pelas firmas pode ser muito baixo
-OF_be(t,z)  = OF_b(t-1,end) + beta_b.*(OF_bt(t,z-1) - OF_b(t-1,end));       %11.100 o livro diz que um NCAR menor faz as taxas de juros serem maiores, n„o È isso que acontece
+OF_bt(t,z)  = NCAR.*(L_fs(t-1,end) + L_hs(t-1,end));                        %11.99 se o banco for manter essa regra e s√≥ dar os empr√©stimos que todo mundo aceita √© muito f√°cil o spread se tornar negativo, pois, se poucos empr√©stimos forem tomados, o lucro desejado pelas firmas pode ser muito baixo
+OF_be(t,z)  = OF_b(t-1,end) + beta_b.*(OF_bt(t,z-1) - OF_b(t-1,end));       %11.100 o livro diz que um NCAR menor faz as taxas de juros serem maiores, n√£o √© isso que acontece
 FU_bt(t,z)  = OF_be(t,z-1) - OF_b(t-1,end) + npl_e(t,z-1).*L_fs(t-1,end);   %11.101
 npl_e(t,z)  = epsilon_b.*npl_e(t-1,end) + (1 - epsilon_b).*npl(t-1,1);      %11.102
 FD_b(t,z)   = lambda_b.*Y(t-1,end);                                         %11.103 porque 
@@ -508,15 +512,15 @@ addl(t,z)   = (F_bt(t,z-1) - rb(t-1,1).*B_bd(t-1,end)...
 FU_b(t,z)   = F_b(t,z-1) - FD_b(t,z-1);                                     %11.107
 OF_b(t,z)   = OF_b(t-1,end) + FU_b(t,z-1) - NPL(t,z-1);                     %11.108
 CAR(t,z)    = OF_b(t,z-1)./(L_fs(t,z-1) + L_hs(t,z-1));                     %11.109
-B_bd(t,z)   = B_bs(t,z-1);                                                  %11.110 essa equaÁao n„o È redundante
+B_bd(t,z)   = B_bs(t,z-1);                                                  %11.110 essa equa√ßao n√£o √© redundante
 
     end
 end
 %%
 
-% Fazendo os Gr·ficos 
+% Fazendo os Gr√°ficos 
 
-%Vetorizando as vari·veis endÛgenas:
+%Vetorizando as vari√°veis end√≥genas:
 
 addl              = addl(:,end);
 B_bd              = B_bd(:,end);
@@ -631,7 +635,7 @@ figure
 plot(T-200:T,WB(T-200:T)./Y(T-200:T),'-r','LineWidth',1.5)
 grid on
 legend('WB/Y')
-title('ParticipaÁ„o dos Sal·rios')
+title('Participa√ß√£o dos Sal√°rios')
 xlabel('Tempo')
 ylabel('Valor')
 
@@ -640,7 +644,7 @@ figure
 plot(T-200:T,u(T-200:T),'-m','LineWidth',1.5)
 grid on
 legend('u')
-title('UtilizaÁ„o de Capacidade')
+title('Utiliza√ß√£o de Capacidade')
 xlabel('Tempo')
 ylabel('Valor')
 
@@ -649,7 +653,7 @@ figure
 plot(T-200:T,BUR(T-200:T),'-c','LineWidth',1.5)
 grid on
 legend('BUR')
-title('Endividamento das FamÌlias')
+title('Endividamento das Fam√≠lias')
 xlabel('Tempo')
 ylabel('Valor')
 
@@ -658,7 +662,7 @@ figure
 plot(T-200:T,F_b(T-200:T)./F_f(T-200:T),'-c','LineWidth',1.5)
 grid on
 legend('Fb/Ff')
-title('Raz„o Entre Lucros Banc·rios e Das Firmas')
+title('Raz√£o Entre Lucros Banc√°rios e Das Firmas')
 xlabel('Tempo')
 ylabel('Valor')
 
@@ -667,7 +671,7 @@ figure
 plot(700:T,L_fd(700:T)./(K(700:T)+IN(700:T)),'-c','LineWidth',1.5)
 grid on
 legend('L/(K+IN)')
-title('Raz„o Entre Passivos e Ativos Das Firmas')
+title('Raz√£o Entre Passivos e Ativos Das Firmas')
 xlabel('Tempo')
 ylabel('Valor')
 
