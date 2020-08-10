@@ -1,4 +1,4 @@
-%Resolução do Modelo GROWTH do capítulo 11 do livro Monetary Economics de Godley e Lavoie (2006), pelo MATLAB
+%Resolução do Modelo GROWTH do capítulo 11 do livro Monetary Economics de Godley e Lavoie (2006), pelo MATLAB para o meu Trabalho de Conclusão de Curso
 
 %GODLEY, W.; LAVOIE, M. Monetary Economics: An Integrated Approach to Credit, Money, Income, Production and Wealth. United Kingdom: Palgrave Macmillan. 2006.
 
